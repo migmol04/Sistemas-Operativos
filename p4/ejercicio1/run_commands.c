@@ -14,7 +14,9 @@ pid_t launch_command(char **argv) {
         perror("fork");
         exit(EXIT_FAILURE);
     } else if (pid == 0) {  // Código del proceso hijo
-        if (execvp(argv[0], argv) == -1) {  // Ejecuta el comando
+        if (execvp(argv[0], argv) == -1) {  // Ejecuta el comando  
+        /*int execvp(const char *file, char *const argv[]); file: Nombre del comando a ejecutar (ej. "ls").
+argv: Un arreglo de punteros a cadenas que representan los argumentos del comando. Debe terminar con NULL.*/ 
             perror("execvp");
             exit(EXIT_FAILURE);
         }

@@ -28,10 +28,33 @@ int main(int argc, char* argv[]) {
 		}
 	}
 */
-	while ((c = fread(buffer, sizeof(char), sizeof(buffer), file)) > 0) {
-		/* Print byte to stdout */
-		 bytesWritten = fwrite(buffer, sizeof(char), c, stdout);
+	while ((c = fread(buffer, sizeof(char), sizeof(buffer), file)) > 0) {  /*size_t fread(void *ptr, size_t size, size_t count, FILE *stream); Parámetros
+void *ptr:
+Un puntero al bloque de memoria donde se almacenarán los datos leídos.
 
+size_t size:
+El tamaño (en bytes) de cada elemento a leer.
+
+size_t count:
+La cantidad de elementos de tamaño size que se leerán.
+
+FILE *stream:
+El puntero al archivo del cual se van a leer los datos.*/ 
+		/* Print byte to stdout */
+		 bytesWritten = fwrite(buffer, sizeof(char), c, stdout);  /*size_t fwrite(const void *ptr, size_t size, size_t count, FILE *stream);
+const void *ptr:
+Un puntero al bloque de memoria que contiene los datos a escribir.
+
+size_t size:
+El tamaño (en bytes) de cada elemento a escribir.
+
+size_t count:
+La cantidad de elementos de tamaño size que se escribirán.
+
+FILE *stream:
+El puntero al archivo donde se escribirán los datos.
+
+*/
 		if (bytesWritten==0){
 			fclose(file);
 			err(3,"putc() failed!!");

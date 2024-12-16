@@ -42,7 +42,21 @@ char *loadstr(FILE *file) {
     }
 
     // Retroceder en el archivo para leer toda la cadena
-    fseek(file, -stringBytes, SEEK_CUR);
+    fseek(file, -stringBytes, SEEK_CUR); /*La función fseek se utiliza para mover el puntero de posición dentro de un archivo. 
+    Este puntero indica desde qué posición se leerán o escribirán datos la próxima vez.
+    FILE *stream
+
+El puntero al archivo que se está manejando, por ejemplo, file.
+long offset
+
+Número de bytes a mover desde la posición indicada por origin.
+Puede ser positivo (mover hacia adelante) o negativo (mover hacia atrás).
+int origin
+
+Indica desde dónde se va a mover el puntero. Las opciones más comunes son:
+SEEK_SET: Mover el puntero desde el inicio del archivo.
+SEEK_CUR: Mover el puntero desde la posición actual del puntero.
+SEEK_END: Mover el puntero desde el final del archivo.*/
     fread(str, 1, stringBytes, file);
 
     // Liberar memoria del carácter temporal

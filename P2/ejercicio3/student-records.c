@@ -51,7 +51,10 @@ int print_text_file(char *path) {
         char *token;
         char *rest = line;
 
-        token = strsep(&rest, ":");
+        token = strsep(&rest, ":"); /*Parámetros:
+
+&rest: Puntero a una cadena que se va modificando con cada llamada.
+":": El carácter delimitador para separar tokens.*/
         if (token != NULL) {
             student.student_id = atoi(token);
         } else {
@@ -78,7 +81,13 @@ int print_text_file(char *path) {
                 fclose(file);
                 return EXIT_FAILURE;
             }
-            strcpy(student.first_name, token);
+            strcpy(student.first_name, token); /*char *strncpy(char *dest, const char *src, size_t n); dest: Puntero al búfer de destino donde se copiarán los caracteres.
+
+src: Puntero a la cadena de origen que se va a copiar.
+
+n: Número máximo de caracteres a copiar desde src.
+
+Devuelve: Un puntero a dest (la cadena de destino). */
         } else {
             fprintf(stderr, "Error parsing first_name at line %d\n", i + 1);
             fclose(file);
@@ -162,13 +171,20 @@ int write_binary_file(char *input_file, char *output_file) {
     }
 
     int num_records;
-    fscanf(infile, "%d\n", &num_records);
+    fscanf(infile, "%d\n", &num_records);   
     fwrite(&num_records, sizeof(num_records), 1, outfile);
 
     for (int i = 0; i < num_records; i++) {
         student_t student;
         char line[MAXLEN_LINE_FILE];
-        fgets(line, sizeof(line), infile);
+        fgets(line, sizeof(line), infile);  /*fgets(line, sizeof(line), file); Descripción: 
+        Lee una línea completa de un archivo.
+
+        Parámetros:
+
+        line: Un buffer donde se almacenará la línea leída.
+        sizeof(line): El tamaño máximo de caracteres a leer (para evitar desbordamiento de buffer).
+        file: El puntero al archivo desde donde se leerá.*/
 
         char *token = strtok(line, ":");
         student.student_id = atoi(token);
@@ -178,7 +194,8 @@ int write_binary_file(char *input_file, char *output_file) {
         student.NIF[MAX_CHARS_NIF] = '\0'; // Ensure null termination
 
         token = strtok(NULL, ":");
-        student.first_name = strdup(token);
+        student.first_name = strdup(token);  /*char *strdup(const char *str); str: Puntero a la cadena que se quiere duplicar.
+Devuelve: Un puntero a una nueva cadena que es una copia exacta de str. Esta copia se almacena en memoria dinámica y debe liberarse con free() cuando ya no se necesite.*/
 
         token = strtok(NULL, ":\n");
         student.last_name = strdup(token);

@@ -33,7 +33,16 @@ void copy_regular(char *orig, char *dest) {
     int fdo, fdd;
 
     // Abrir archivo origen en modo lectura
-    fdo = open(orig, O_RDONLY);
+    fdo = open(orig, O_RDONLY);  /*int open(const char *pathname, int flags, mode_t mode); Parámetros:
+
+pathname: Ruta del archivo a abrir.
+flags: Modos de apertura. Algunos de los más comunes son:
+O_RDONLY: Solo lectura.
+O_WRONLY: Solo escritura.
+O_RDWR: Lectura y escritura.
+O_CREAT: Crea el archivo si no existe.
+O_TRUNC: Trunca el archivo a tamaño cero si ya existe.
+mode: Permisos del archivo (solo si se usa O_CREAT). Ejemplo: 0660 (lectura/escritura para el propietario y grupo).*/
     if (fdo < 0) {
         perror("Error abriendo el archivo origen");
         exit(EXIT_FAILURE);
@@ -60,7 +69,14 @@ void copy_link(char *orig, char *dest) {
     struct stat sb; // Estructura para almacenar información del archivo
 
     // Paso 1: Obtener información sobre el enlace simbólico
-    if (lstat(orig, &sb) < 0) {  // Usar lstat para no seguir el enlace simbólico
+    if (lstat(orig, &sb) < 0) {  // Usar lstat para no seguir el enlace simbólico  
+     /*int lstat(const char *pathname, struct stat *buf);  
+     Parámetros:
+
+pathname: Ruta del archivo.
+buf: Puntero a una estructura stat donde se almacenará la información del archivo.
+Devuelve: 0 si tiene éxito, -1 si hay un error.*/
+
         perror("Error obteniendo información del enlace simbólico");
         exit(EXIT_FAILURE); // Salir si ocurre un error
     }

@@ -13,7 +13,12 @@ void mostrar_contenido(int fd) {
 
     // Leer byte a byte desde la posición actual del marcador
     while ((bytes_read = read(fd, &buffer, 1)) > 0) {
-        write(STDOUT_FILENO, &buffer, 1); // Escribir en la salida estándar
+        write(STDOUT_FILENO, &buffer, 1); // Escribir en la salida estándar 
+        /*ssize_t write(int fd, const void *buf, size_t count);fd: Descriptor de archivo que identifica dónde se va a escribir.
+
+buf: Puntero al búfer con los datos a escribir.
+
+count: Número de bytes a escribir.*/
     }
 
     if (bytes_read < 0) {
