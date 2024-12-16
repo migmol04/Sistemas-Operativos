@@ -100,6 +100,18 @@ int main(int argc, char *argv[]) {
                 pid_t pid = launch_command(cmd_argv); //Crea un proceso hijo para ejecutar el comando con execvp
                 int status;
                 waitpid(pid, &status, 0);//Espera a que el proceso hijo termine y obtiene su estado
+                /*pid_t waitpid(pid_t pid, int *status, int options);
+                Descripción: Hace que el proceso padre espere a que un proceso hijo termine.
+
+Parámetros:
+
+pid: El PID del hijo a esperar (-1 para esperar a cualquier hijo).
+status: Puntero donde se almacenará el estado del proceso hijo.
+options: Opciones adicionales (ej. 0 para comportamiento por defecto).
+Devuelve:
+
+El PID del hijo que terminó.
+-1 si hay un error.*/
                 printf("@@ Command terminated (pid: %d, status: %d)\n", pid, WEXITSTATUS(status));
 
                 // Liberar memoria
